@@ -141,7 +141,7 @@ def handle_calculate_IK(req):
             R0_3 = T0_1[0:3, 0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
             R0_3 = R0_3.evalf(subs={q1: theta1, q2: theta2, q3: theta3})
 
-            R3_6 = R0_3.inv("LU") * ROT_EE
+            R3_6 = R0_3.transpose() * ROT_EE
 
             # Euler angles from rotation matrix
             theta4 = atan2(R3_6[2,2], -R3_6[0,2])
