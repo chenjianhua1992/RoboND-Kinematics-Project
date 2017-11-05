@@ -11,6 +11,11 @@
 6. Fill in the `IK_server.py` with your Inverse Kinematics code. 
 
 
+[//]: # (Image References)
+
+[image1]: ./misc_images/joints.jpg
+[image2]: ./misc_images/Thetas_pt1.png
+[image3]: ./misc_images/thetas_pt2.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -24,6 +29,10 @@ You're reading it!
 
 ### Kinematic Analysis
 #### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
+
+Annotated figure of the robot with proper link assignments and joint rotations:
+
+![alt text][image1]
 
 Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 --- | --- | --- | --- | ---
@@ -65,6 +74,11 @@ I defined my homogenous transform as a function called TF_Matrix I could call it
 The homogenous transform uses the alpha column to get the twist angle between the link frames. It plugs in values from the *a* column in [0, 3] to provide the *x* offset between the link frames. Then, the *d* column is used with the sine and cosine of the alpha value to get the *y* and *z* offsets. 
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
+
+Images of notes with more detail following:
+
+![alt text][image2]
+![alt text][image3]
 
 Since the Kuka KR210's last three joints can be characterized as a spherical wrist, as the last three joints are revolute with axes that intersect at a single point. Thus, we can decouple the IK problem into Inverse Position Kinematics on joints 1 to 3 and Inverse Orientation Kinematics on joints 4 to 6. 
 
@@ -135,6 +149,8 @@ Now that Inverse Position Kinematics are completed, we turn to Inverse Orientati
 ### Project Implementation
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
+
+Please see the .MOV file in this directory for a video of a successful pick and place run. 
 
 I ran into a significant hitch with my IK for the wrist center, as the wrist kept twisting and making unnecessary movements when moving to each point along the trajectory. I found that using .transpose() instead of .inv("LU") to get the inverse of the R0_3 rotation matrix resolved the problem. 
 
