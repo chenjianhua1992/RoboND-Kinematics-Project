@@ -14,8 +14,8 @@
 [//]: # (Image References)
 
 [image1]: ./misc_images/joints.jpg
-[image2]: ./misc_images/Thetas_pt1.png
-[image3]: ./misc_images/thetas_pt2.png
+[image2]: ./misc_images/t1.jpg
+[image3]: ./misc_images/t2.jpg
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
